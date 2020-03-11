@@ -1,0 +1,14 @@
+import Debuff from "../Debuff";
+
+export default class Frozen extends Debuff{
+  constructor(duration) {
+    super(duration);
+    this.desc = '冰冻';
+  }
+
+  affect(zombie) {
+    zombie.moveSpeedScale = 0;
+    zombie.atkTimeLeftScale = 0;
+  }
+
+}

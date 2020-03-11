@@ -1,0 +1,195 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  /* font-family: "Microsoft YaHei"; */
+  outline: none;
+  margin: 0;
+  padding: 0;
+  border: none;
+  text-decoration: none;
+}
+
+html {
+  font-size: 16px;
+}
+
+/*https://www.zhangxinxu.com/wordpress/2016/08/vw-viewport-responsive-layout-typography/*/
+/*@media screen and (min-width: 375px) {*/
+/*  html {*/
+/*    !* iPhone6的375px尺寸作为16px基准，414px正好18px大小, 600 20px *!*/
+/*    font-size: calc(100% + 2 * (100vw - 375px) / 39);*/
+/*    font-size: calc(16px + 2 * (100vw - 375px) / 39);*/
+/*  }*/
+/*}*/
+/*@media screen and (min-width: 414px) {*/
+/*  html {*/
+/*    !* 414px-1000px每100像素宽字体增加1px(18px-22px) *!*/
+/*    font-size: calc(112.5% + 4 * (100vw - 414px) / 586);*/
+/*    font-size: calc(18px + 4 * (100vw - 414px) / 586);*/
+/*  }*/
+/*}*/
+/*@media screen and (min-width: 600px) {*/
+/*  html {*/
+/*    !* 600px-1000px每100像素宽字体增加1px(20px-24px) *!*/
+/*    font-size: calc(125% + 4 * (100vw - 600px) / 400);*/
+/*    font-size: calc(20px + 4 * (100vw - 600px) / 400);*/
+/*  }*/
+/*}*/
+/*@media screen and (min-width: 1000px) {*/
+/*  html {*/
+/*    !* 1000px往后是每100像素0.5px增加 *!*/
+/*    font-size: calc(137.5% + 6 * (100vw - 1000px) / 1000);*/
+/*    font-size: calc(22px + 6 * (100vw - 1000px) / 1000);*/
+/*  }*/
+/*}*/
+
+html {
+  /*overflow-y: scroll;*/
+  height: 100%;
+}
+:root {
+  overflow-y: auto;
+  /*overflow-x: hidden;*/
+}
+:root body {
+  position: absolute;
+}
+body {
+  width: 100vw;
+  overflow-x: auto;
+  /*overflow-y: hidden;*/
+  text-align:center;
+  height: 100%;
+}
+
+li {
+  display: block;
+}
+
+.btn-blue {
+  background-color: #08c5fc;
+}
+
+.btn-blue:active {
+  background-color: cyan;
+}
+
+.btn-yellow {
+  background-color: #fddf4a;
+}
+
+.btn-yellow:active {
+  background-color: white;
+}
+
+.font-orange,
+[font-orange] {
+  color: #f19e18;
+}
+
+.font-blue,
+[font-blue] {
+  color: #61c1ff;
+}
+
+.font-red,
+[font-red] {
+  color: #e06378;
+}
+
+.font-purple,
+[font-purple]{
+  color: #b37cfd;
+}
+
+.font-yellow,
+[font-yellow] {
+  color: #fdea4e;
+}
+
+.font-gray,
+[font-gray]{
+  color: rgb(146, 162, 176);
+}
+
+.font-white,
+[font-white] {
+  color: white;
+}
+
+.font-100,
+[font-100] {
+  font-size: 1rem;
+}
+
+.font-87,
+[font-87]{
+  font-size: 0.875rem;
+}
+
+.font-75,
+[font-75]{
+  font-size: 0.75rem;
+}
+
+.column-flex,
+.row-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.column-flex {
+  flex-direction: column;
+}
+
+.row-flex {
+  flex-direction: row;
+}
+
+.column-flex.flex-start,
+.row-flex.flex-start {
+  justify-content: flex-start;
+}
+
+.column-flex.flex-end,
+.row-flex.flex-end {
+  justify-content: flex-end;
+}
+
+.column-flex.space-around,
+.row-flex.space-around {
+  justify-content: space-around;
+}
+
+.column-flex.space-between,
+.row-flex.space-between {
+  justify-content: space-between;
+}
+
+.column-flex.width-auto,
+.row-flex.width-auto {
+  width: auto;
+}
+
+.column-flex.height-auto,
+.row-flex.height-auto {
+  height: auto;
+}
+
+.self-flex-end {
+  align-self: flex-end;
+}
+
+.self-flex-start {
+  align-self: flex-start;
+}
+
+.self-flex-center {
+  align-self: center;
+}

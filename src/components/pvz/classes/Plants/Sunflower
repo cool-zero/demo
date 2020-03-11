@@ -1,0 +1,130 @@
+import Plant from "../Plant";
+import Sunlight from "../Bullets/Sunlight";
+
+const WIDTH = 70;
+const HEIGHT = 80;
+
+function _createImg() {
+  const canvas = document.createElement('canvas');
+  canvas.width = WIDTH;
+  canvas.height = HEIGHT;
+  const context = canvas.getContext('2d');
+
+  const width = canvas.width * 0.8;
+  const height = canvas.height * 0.8;
+
+  context.translate(canvas.width * 0.1, canvas.height * 0.1);
+
+  context.save();
+  context.beginPath();
+  context.rect(width * 0.1, height * 0.85, width * 0.35, height * 0.15);
+  context.rect(width * 0.55, height * 0.85, width * 0.35, height * 0.15);
+  context.closePath();
+  context.strokeStyle = 'black';
+  context.stroke();
+  context.fillStyle = 'green';
+  context.fill();
+  context.restore();
+
+  context.save();
+  context.beginPath();
+  context.rect(width * 0.45, height * 0.5, width * 0.1, height * 0.35);
+  context.closePath();
+  context.strokeStyle = 'black';
+  context.stroke();
+  context.fillStyle = 'green';
+  context.fill();
+  context.restore();
+
+  // 花瓣
+  context.save();
+  context.fillStyle = 'rgb(244,255,14)';
+  for (let i = 0; i < 6; i++) {
+    context.beginPath();
+    context.ellipse(
+      width / 2,
+      height / 4,
+      width * 0.35,
+      width / 10,
+      i * Math.PI / 6,
+      0,
+      Math.PI * 2
+    );
+    context.closePath();
+    context.fill();
+  }
+  context.restore();
+
+  // 头
+  context.save();
+  context.beginPath();
+  context.arc(
+    width / 2,
+    height / 4,
+    width * 0.2,
+    0,
+    Math.PI * 2
+  );
+  context.closePath();
+  context.fillStyle = 'rgb(255,187,60)';
+  context.fill();
+  context.restore();
+
+  // 眼睛和嘴
+  context.save();
+  context.beginPath();
+  context.arc(
+    width * 0.4,
+    height * 0.2,
+    width * 0.04,
+    0,
+    Math.PI * 2
+  );
+  context.arc(
+    width * 0.6,
+    height * 0.2,
+    width * 0.04,
+    0,
+    Math.PI * 2
+  );
+  context.closePath();
+  context.fillStyle = 'rgba(0,0,0,1)';
+  context.fill();
+  context.beginPath();
+  context.ellipse(
+    width / 2,
+    height * 0.3,
+    width / 8,
+    width / 10,
+    0,
+    0,
+    Math.PI
+  );
+  context.closePath();
+  context.strokeStyle = 'rgba(0,0,0,1)';
+  context.stroke();
+  context.restore();
+
+  return canvas;
+}
+
+const SUNFLOWER_IMG = _createImg();
+
+export default class Sunflower extends Plant{
+  constructor(x, y) {
+    super(x, y);
+    this._initAtkDuration = 5000;
+    this.cost = Sunflower.getCost();
+    this.name = '向日葵';
+    this.bulletClass = Sunlight;
+    this.img = SUNFLOWER_IMG;
+  }
+
+  static getCost() {
+    return 50;
+  }
+
+  static createImg() {
+    return _createImg();
+  }
+}

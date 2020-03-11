@@ -1,0 +1,28 @@
+const SIZE = 15;
+
+export default class Bullet {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+    this.size = SIZE;
+    this.width = SIZE;
+    this.height = SIZE;
+    this.hurt = 10;
+    this.speed = 0.07;
+    this.disablePrepaing = false;
+    this.isDisabled = false;
+    this.specialEffect = null;
+  }
+
+  move(milliTime) {
+    this.x += this.speed * milliTime;
+  }
+
+  edgeDetect(edgeX) {
+    if(edgeX < this.x) {
+      this.isDisabled = true;
+      return true;
+    }
+    return false;
+  }
+}

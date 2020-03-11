@@ -1,0 +1,47 @@
+import Bullet from "../Bullet";
+
+const SIZE = 20;
+
+function _createImg(){
+  const canvas = document.createElement('canvas');
+  canvas.width = SIZE;
+  canvas.height = SIZE;
+  const context = canvas.getContext('2d');
+  context.beginPath();
+  context.arc(canvas.width / 2,
+    canvas.height / 2,
+    canvas.width / 2,
+    0,
+    Math.PI * 2
+  );
+  context.closePath();
+  context.fillStyle = 'green';
+  context.fill();
+  return canvas;
+}
+
+const PEA_IMG = _createImg();
+
+export default class Pea extends Bullet{
+
+  static createImg() {
+    return _createImg();
+  }
+
+  constructor(x, y) {
+    super(x, y);
+    this.size = SIZE;
+    this.speed = 0.07;
+    this.img = PEA_IMG;
+  }
+
+  fire() {
+    this.hurt *= 2;
+    this.extraEffet = 'fire';
+  }
+
+  freeze() {
+    this.extraEffet = 'freeze';
+  }
+
+}

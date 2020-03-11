@@ -1,0 +1,34 @@
+export default class Debuff {
+  constructor(duration) {
+    this.duration = duration;
+    this.timeLeft = this.duration;
+    this.desc = null;
+    this.isDisabled = false;
+  }
+
+  /**
+   *
+   * @param {Debuff, Number} obj
+   */
+  setTimeLeft(obj) {
+    if(obj instanceof Number) {
+      this.timeLeft = obj;
+    }else if(obj instanceof Debuff) {
+      this.timeLeft = obj.timeLeft;
+    }
+  }
+
+  update(milliSec) {
+    this.timeLeft -= milliSec;
+    if(this.timeLeft <= 0) {
+      this.isDisabled = true;
+    }
+    return this.isDisabled;
+  }
+
+  /**
+   *
+   * @param {Zombie} zombie
+   */
+  affect(zombie) {}
+}

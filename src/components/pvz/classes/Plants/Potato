@@ -1,0 +1,16 @@
+import Plant from "../Plant";
+
+export default class Potato extends Plant{
+  constructor(x, y) {
+    super(x, y);
+    this._initPrepareTime = 15000;
+    this.prepareTime = 15000;
+    this.shouldAttack = false;
+    this.nextAtkTimeLeft = 5000;
+  }
+
+  attack(time) {
+    this.nextAtkTimeLeft -= time;
+  }
+
+}

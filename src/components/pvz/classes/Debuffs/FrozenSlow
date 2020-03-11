@@ -1,0 +1,28 @@
+import Debuff from "../Debuff";
+
+/**
+ * @param {HTMLCanvasElement} canvas
+ * @private
+ */
+const _createMask = (img) => {
+  const canvas = document.createElement('canvas');
+  const context = canvas.getContext('2d');
+  context.save();
+  context.globalCompositeOperation = 'source-atop';
+  context.fillStyle = 'rgba(49,165,255,0.4)';
+  context.fillRect(0,0,canvas.width, canvas.height);
+  context.restore();
+  return canvas;
+};
+
+export default class FrozenSlow extends Debuff{
+  constructor(duration) {
+    super(duration);
+    this.desc = `冰冻减速`;
+  }
+
+  affect(zombie) {
+    zombie.moveSpeedScale = 0.5;
+    zombie.atkTimeLeftScale = 0.5;
+  }
+}

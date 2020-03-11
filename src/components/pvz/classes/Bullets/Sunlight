@@ -1,0 +1,91 @@
+import Bullet from "../Bullet";
+
+const SIZE = 40;
+
+function _createImg() {
+  const canvas = document.createElement('canvas');
+  canvas.width = SIZE;
+  canvas.height = SIZE;
+  const context = canvas.getContext('2d');
+
+  const pointsOfDiamond = [
+    0, canvas.height / 2,
+    canvas.width / 2, canvas.height * 0.7,
+    canvas.width, canvas.height / 2,
+    canvas.width / 2, canvas.height * 0.3
+  ];
+  for (let i = 0; i < 4; i++) {
+    context.save();
+    context.translate(canvas.width / 2, canvas.height / 2);
+    context.rotate(i * Math.PI / 4);
+    context.translate(-canvas.width / 2, -canvas.height / 2);
+    context.beginPath();
+    context.moveTo(pointsOfDiamond[6], pointsOfDiamond[7]);
+    for (let j = 0; j < pointsOfDiamond.length; j += 2) {
+      context.lineTo(pointsOfDiamond[j], pointsOfDiamond[j + 1]);
+    }
+    context.closePath();
+    context.fillStyle = 'rgba(255,237,12,0.7)';
+    context.fill();
+    context.restore();
+  }
+
+  context.save();
+  context.beginPath();
+  context.arc(canvas.width / 2,
+    canvas.height / 2,
+    canvas.width * 0.3,
+    0,
+    Math.PI * 2
+  );
+  context.closePath();
+  context.fillStyle = 'rgba(255,237,12,1)';
+  context.fill();
+  context.restore();
+
+  // context.save();
+  // context.restore();
+
+  return canvas;
+}
+
+const SUNLIGHT_IMG = _createImg();
+
+export default class Sunlight extends Bullet{
+  constructor(x, y, number = 25, edge) {
+    super(x, y);
+    this.size = SIZE;
+    this.speed = 0.05;
+    this.img = SUNLIGHT_IMG;
+    this.number = number;
+    this.disablePreparing = false;
+    this.disabledTimeLeft = 4000;
+    this.edge = edge || (this.y + this.size);
+  }
+
+  award() {
+    this.isDisabled = true;
+    return this.number;
+  }
+
+  edgeDetect() {
+    if(this.disablePreparing) {
+      if(this.disabledTimeLeft <= 0) {
+        this.isDisabled = true;
+      }
+    }
+  }
+
+  move(milliTime) {
+    if(this.disablePreparing) {
+      this.disabledTimeLeft -= milliTime;
+    }
+    if(this.y < this.edge) {
+      this.y += this.speed * milliTime;
+    }
+  }
+
+  static createImg() {
+    return _createImg();
+  }
+}

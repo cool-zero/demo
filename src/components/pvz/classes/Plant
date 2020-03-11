@@ -1,0 +1,111 @@
+import Bullet from "./Bullet";
+
+const WIDTH = 70;
+const HEIGHT = 80;
+
+export default class Plant {
+
+  static getWidth() {
+    return WIDTH;
+  }
+
+  static getHeight() {
+    return HEIGHT;
+  }
+
+  static getCost() {
+    return 9999;
+  }
+
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+    this._initAtkDuration = 2000;
+    this.cost = Plant.getCost();
+    this._initPrepareTime = 5000;
+    this.blood = 50;
+    this.prepareTime = 0;
+    this.nextAtkTimeLeft = 0;
+    this.bulletNumber = 1;
+    this.canAttack = true;
+    this.shouldAttack = true;
+    this.width = WIDTH;
+    this.height = HEIGHT;
+    this.attackX = this.x + this.width / 2;
+    this.attackY = this.y + this.height / 4;
+    this.bulletClass = Bullet;
+    this.plantation = ['pumpkin', 'pot', 'lotus', 'grass'];
+  }
+
+  attack(time) {
+    this.nextAtkTimeLeft -= time;
+    if (this.nextAtkTimeLeft <= 0) {
+      this.canAttack = true;
+      this.nextAtkTimeLeft = this._initAtkDuration;
+    }
+    if (this.canAttack && this.shouldAttack) {
+      this.canAttack = false;
+      const bullets = [];
+      for (let i = 0; i < this.bulletNumber; i++) {
+        bullets.push(new this.bulletClass(this.attackX, this.attackY));
+      }
+      return bullets;
+    }
+    return null;
+  }
+
+  canBePlantedAt(plantationType) {
+    return this.plantation.indexOf(plantationType) !== -1;
+  }
+
+  initPrepareTime() {
+    if(this.prepareTime > 0) {
+      throw new Error('出现了异常情况，在植物准备时间尚未结束的时候，植物重新进入了准备');
+    }
+    this.prepareTime = this._initPrepareTime;
+  }
+
+  updatePrepareTime(deltaTime) {
+    if(this.prepareTime <= 0) return;
+    this.prepareTime -= deltaTime;
+  }
+
+  hasEnoughSunlight(/*Number*/sunlight) {
+    return this.cost <= sunlight;
+  }
+
+  /**
+   * 设置数组坐标X
+   * @param x 数组坐标X
+   * @returns {PlantOption}
+   */
+  setCoordsX(x) {
+    this.coordsX = x;
+    return this;
+  }
+
+  /**
+   * 设置数组坐标Y
+   * @param y 数组坐标Y
+   * @returns {PlantOption}
+   */
+  setCoordsY(y) {
+    this.coordsY = y;
+    return this;
+  }
+
+  /**
+   * 设置数组坐标
+   * @param {Number} x
+   * @param {Number} y
+   * @returns {PlantOption}
+   */
+  setCoords(x, y) {
+    this.coordsX = x;
+    this.coordsY = y;
+    return this;
+  }
+
+}
+
+

@@ -1,0 +1,53 @@
+export default class PlantOption {
+
+  /**
+   * @param {Plant} plantClazz
+   * @param {HTMLCanvasElement, HTMLImageElement} [img]
+   */
+  constructor(plantClazz, img) {
+    this.class = plantClazz;
+    this.entity = new plantClazz(Number.MIN_VALUE, Number.MIN_VALUE);
+    this.cost = this.entity.cost;
+    this.img = this.entity.img || img;
+    if(this.img instanceof HTMLCanvasElement) {
+      this.src = this.img.toDataURL('image/png');
+    }else if(this.img instanceof String) {
+      this.src = this.img;
+    }else if(this.img instanceof HTMLImageElement) {
+      this.src = this.img.src;
+    }
+  }
+
+  /**
+   * 设置种植坐标X
+   * @param x 种植坐标
+   * @returns {PlantOption}
+   */
+  setPlantedX(x) {
+    this.bePlantedX = x;
+    return this;
+  }
+
+  /**
+   * 设置种植坐标Y
+   * @param y 种植坐标Y
+   * @returns {PlantOption}
+   */
+  setPlantedY(y) {
+    this.bePlantedY = y;
+    return this;
+  }
+
+  /**
+   * 设置种植坐标
+   * @param x 种植坐标X
+   * @param y 种植坐标Y
+   * @returns {PlantOption}
+   */
+  setPlanted(x, y) {
+    this.bePlantedX = x;
+    this.bePlantedY = y;
+    return this;
+  }
+
+}

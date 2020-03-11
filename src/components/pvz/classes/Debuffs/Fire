@@ -1,0 +1,20 @@
+import Debuff from "../Debuff";
+
+export default class Fire extends Debuff{
+  constructor() {
+    super();
+    this.desc = '火焰';
+    this.duration = 0;
+  }
+
+  /**
+   * @param {Zombie} zombie
+   */
+  affect(zombie) {
+    zombie.allDebuff.length = 0;
+    zombie.moveSpeedScale = 1;
+    zombie.atkTimeLeftScale = 1;
+    this.isDisabled = true;
+  }
+
+}

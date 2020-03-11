@@ -1,0 +1,51 @@
+const PLACE_VERTICAL = {
+  'grass': 5,
+  'fog': 6,
+  'night': 5,
+  'swimmingPool': 6,
+  'roof': 5
+};
+
+export default class Game {
+  /**
+   * @param {HTMLCanvasElement} canvas
+   * @param {Number} plantOptionsSize
+   */
+  constructor(canvas, plantOptionsSize) {
+    this.canvas = canvas;
+    this.stage = canvas;
+    this.plantOptionsSize = plantOptionsSize;
+    this.stageWidth = canvas.width;
+    this.stageHeight = canvas.height;
+    this.context = canvas.getContext('2d');
+    this.horizontalNumber = 9;
+    this.verticalNumber = 5;
+    this.plantOptions = new Array(plantOptionsSize);
+    this.plants = [];
+    this.bullets = [];
+    /**
+     * @type {PlantOption}
+     */
+    this.plantReadyToBePlanted = null;
+    this.plantSelectedToBePlanted = { clientX: 0, clientY: 0, imgSrc: null, plantOption: null };
+    this.unexpectedClickPoints = [];
+    this.zombies = [];
+    this.animation = null;
+    this.lastFrame = null;
+  }
+
+  /**
+   * @param {Number} milliSecond
+   */
+  update(milliSecond) {
+
+  }
+
+
+
+  start() {
+    this.lastFrame = Date.now();
+
+    this.animation = requestAnimationFrame
+  }
+}
